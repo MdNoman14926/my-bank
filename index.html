@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+  
+
+    <div id="main">
+        <h1 class="text-center">Nomex Bank Bangladesh LTD</h1>
+        <div class="login-area">
+            <input type="email" class="form-control" placeholder="Gmail">
+            <br>
+            <input type="password" class="form-control" placeholder="Password" id="">
+            <br>
+            <button id="login" class="btn btn-success" >Enter</button>
+        </div>
+    </div>
+    <div id="second">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="status deposit">
+                    <h5>Deposit</h5>
+                    <h1>$<span id="addDeposit">00</span></h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status withdrow">
+                    <h5>Withdrow</h5>
+                    <h1>$ <span id="addWithdrow">00</span></h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status balance">
+                    <h5>Balance</h5>
+                    <h1>$ <span id="curentBalance">1200</span></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="login-area">
+                    <h2>Deposit</h2>
+                    <br>
+                    <input id="deposit-number" class="form-control" type="text" placeholder="$ deposit your mony">
+                    <br>
+                    <button id="deposit" class="btn btn-success mt-2">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+               <div class="login-area">
+                <h2>Withdrow</h2>
+                <br>
+                <input class="form-control" id="withdrowAmount" type="text" placeholder="$ withdrow your mony">
+                <br>
+                <button id="withdrow" class="btn btn-success mt-2">Withdrow</button>
+               </div>
+            </div>
+        </div>
+    </div>
+   <script>
+         //login event handel
+         const login=document.getElementById('login');
+
+        login.addEventListener('click',function(){
+        const main=document.getElementById('main');
+        const second=document.getElementById('second');
+        main.style.display='none';
+        second.style.display='block'
+})
+       //deposit event handle
+
+       const depositBtn=document.getElementById('deposit');
+
+       depositBtn.addEventListener('click',function(){
+            const deposit=document.getElementById('deposit-number').value;
+            const depositNumber=parseFloat(deposit);
+
+         
+            updateSpan('curentBalance',depositNumber)
+            updateSpan('addDeposit',depositNumber)
+
+            document.getElementById('deposit-number').value="";
+       })
+
+
+       function updateSpan(id,depositNumber){
+           
+
+            //balance handle
+            var carentBalence=document.getElementById(id).innerText;
+            var carentBalanceNumber=parseFloat(carentBalence);
+            var total=depositNumber+carentBalanceNumber;
+            document.getElementById(id).innerText=total;
+       }
+    
+       const withdrowBtn=document.getElementById('withdrow');
+
+       withdrowBtn.addEventListener('click',function(){
+
+        const withdrowAmount=document.getElementById('withdrowAmount').value;
+        const withdrowNumber=parseFloat(withdrowAmount)
+        
+        const addWithdrow=document.getElementById('addWithdrow').innerText;
+        const addWithdrowNumber=parseFloat(addWithdrow);
+        const total=withdrowNumber+addWithdrowNumber;
+
+        document.getElementById('addWithdrow').innerText=total;
+
+       const curentBalance=document.getElementById('curentBalance'.innerText);
+       const curentBalanceNumber=parseFloat(curentBalance);
+       const totalBalance=curentBalanceNumber-addWithdrowNumber;
+       const totalBalanceNumber=parseFloat(totalBalance)
+
+       document.getElementById('curentBalance').innerText=totalBalanceNumber;
+
+    })
+      
+   </script>
+  </body>
+</html>
