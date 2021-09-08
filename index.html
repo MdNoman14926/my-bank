@@ -25,7 +25,8 @@
         </div>
     </div>
     <div id="second">
-        <div class="row">
+        <h1 class="text-center">Mawa Transport page</h1>
+        <div class="row mt-5">
             <div class="col-md-4">
                 <div class="status deposit">
                     <h5>Deposit</h5>
@@ -35,7 +36,7 @@
             <div class="col-md-4">
                 <div class="status withdrow">
                     <h5>Withdrow</h5>
-                    <h1>$ <span id="addWithdrow">00</span></h1>
+                    <h1>$ <span id="curentWithdrow">00</span></h1>
                 </div>
             </div>
             <div class="col-md-4">
@@ -82,20 +83,32 @@
        const depositBtn=document.getElementById('deposit');
 
        depositBtn.addEventListener('click',function(){
-            const deposit=document.getElementById('deposit-number').value;
-            const depositNumber=parseFloat(deposit);
+           const depositNumber=getInput('deposit-number');
 
-         
-            updateSpan('curentBalance',depositNumber)
-            updateSpan('addDeposit',depositNumber)
+            updateSpan('curentBalance',depositNumber);
+            updateSpan('addDeposit',depositNumber);
 
             document.getElementById('deposit-number').value="";
        })
+//withdrow handle
+            
+       const withdrowBtn=document.getElementById('withdrow');
+
+       withdrowBtn.addEventListener('click',function(){
+           const withdrowNumber=getInput('withdrowAmount')
+           updateSpan('curentWithdrow',withdrowNumber);
+           updateSpan('curentBalance',-1*withdrowNumber)
+           document.getElementById('withdrowAmount').value='';
+       })
 
 
+       function getInput(id){
+           const amount=document.getElementById(id).value;
+           const inputNumber=parseFloat(amount);
+
+           return inputNumber;
+       }
        function updateSpan(id,depositNumber){
-           
-
             //balance handle
             var carentBalence=document.getElementById(id).innerText;
             var carentBalanceNumber=parseFloat(carentBalence);
@@ -103,28 +116,8 @@
             document.getElementById(id).innerText=total;
        }
     
-       const withdrowBtn=document.getElementById('withdrow');
-
-       withdrowBtn.addEventListener('click',function(){
-
-        const withdrowAmount=document.getElementById('withdrowAmount').value;
-        const withdrowNumber=parseFloat(withdrowAmount)
-        
-        const addWithdrow=document.getElementById('addWithdrow').innerText;
-        const addWithdrowNumber=parseFloat(addWithdrow);
-        const total=withdrowNumber+addWithdrowNumber;
-
-        document.getElementById('addWithdrow').innerText=total;
-
-       const curentBalance=document.getElementById('curentBalance'.innerText);
-       const curentBalanceNumber=parseFloat(curentBalance);
-       const totalBalance=curentBalanceNumber-addWithdrowNumber;
-       const totalBalanceNumber=parseFloat(totalBalance)
-
-       document.getElementById('curentBalance').innerText=totalBalanceNumber;
-
-    })
       
+    
    </script>
   </body>
 </html>
